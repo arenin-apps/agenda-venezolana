@@ -60,6 +60,21 @@
     "source": "Events List"
   },
   {
+    "title": "Bodies Adrift: Miami",
+    "type": "unico",
+    "date": "2026-09-27",
+    "endDate": null,
+    "dateLabel": "DOMINGO, 27 DE SEPTIEMBRE 2026 - 17:30",
+    "venue": "Institute of Contemporary Arts (ICA)",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.ica.art/films/bodies-adrift-miami",
+    "description": "Proyección que incluye el documental venezolano 'Mayami Nuestro' (1981) de Carlos Oteyza, el cual explora la comunidad migrante venezolana en Miami.",
+    "category": "Cine",
+    "source": "Institute of Contemporary Arts"
+  },
+  {
     "title": "Ricardo Montaner • London",
     "type": "unico",
     "date": "2026-10-17",
