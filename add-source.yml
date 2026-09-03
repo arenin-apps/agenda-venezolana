@@ -1,0 +1,48 @@
+name: Agregar fuente
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Nombre de la fuente (ej. 'Museo XYZ')"
+        required: true
+        type: string
+      url:
+        description: "URL donde buscar eventos (la más específica posible, ej. una búsqueda o cartelera, no solo la portada)"
+        required: true
+        type: string
+      use_render_proxy:
+        description: "¿El sitio muestra una página vacía o pide JavaScript? Marcá esto si no estás seguro y después lo probamos"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  add-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Agregar fuente a sources.json
+        env:
+          SOURCE_NAME: ${{ inputs.name }}
+          SOURCE_URL: ${{ inputs.url }}
+          USE_RENDER_PROXY: ${{ inputs.use_render_proxy }}
+        run: node add-source.js
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sources.json
+          git diff --quiet --cached || git commit -m "➕ Nueva fuente: ${{ inputs.name }}"
+          git push
