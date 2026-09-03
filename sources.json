@@ -1,0 +1,295 @@
+[
+  {
+    "name": "SRG (sergius.uk)",
+    "url": "https://sergius.uk/events/"
+  },
+  {
+    "name": "WB Live",
+    "url": "https://www.wblive.co.uk/events"
+  },
+  {
+    "name": "Tate Modern",
+    "url": "https://www.tate.org.uk/search?q=venezuela"
+  },
+  {
+    "name": "Blanco Gallery",
+    "url": "https://www.blancogallery.com/"
+  },
+  {
+    "name": "BFI Player",
+    "url": "https://player.bfi.org.uk/search/subscription?q=venezuela&availability=1&sort=title"
+  },
+  {
+    "name": "Barbican Centre",
+    "url": "https://www.barbican.org.uk/search?search=venezuela"
+  },
+  {
+    "name": "Royal Ballet & Opera",
+    "url": "https://www.rbo.org.uk/"
+  },
+  {
+    "name": "Sadler's Wells",
+    "url": "https://www.sadlerswells.com/"
+  },
+  {
+    "name": "Southbank Centre",
+    "url": "https://www.southbankcentre.co.uk/"
+  },
+  {
+    "name": "Como No",
+    "url": "https://comono.co.uk/whats-on/"
+  },
+  {
+    "name": "De Puta Madre Club",
+    "url": "https://ticket.deputamadreclub.eu/",
+    "useRenderProxy": true
+  },
+  {
+    "name": "National Gallery",
+    "url": "https://www.nationalgallery.org.uk/search?q=venezuela&area=event"
+  },
+  {
+    "name": "Victoria and Albert Museum",
+    "url": "https://www.vam.ac.uk/search?q=venezuela&astyped="
+  },
+  {
+    "name": "Natural History Museum",
+    "url": "https://www.nhm.ac.uk/whats-on.html"
+  },
+  {
+    "name": "Art UK",
+    "url": "https://artuk.org/visit/whats-on"
+  },
+  {
+    "name": "Nations Championship Rugby",
+    "url": "https://nationschampionshiprugby.com/en"
+  },
+  {
+    "name": "Allianz Stadium Twickenham",
+    "url": "https://allianzstadiumtwickenham.com/whats-on"
+  },
+  {
+    "name": "Live Nation",
+    "url": "https://www.livenation.co.uk/search?q=venezuela",
+    "useRenderProxy": true
+  },
+  {
+    "name": "Somerset House",
+    "url": "https://www.somersethouse.org.uk/whats-on"
+  },
+  {
+    "name": "Rich Mix",
+    "url": "https://richmix.org.uk/search/?query=venezuela"
+  },
+  {
+    "name": "Instituto Cervantes Londres",
+    "url": "https://londres.cervantes.es/es/cultura_espanol/calendario_cultural_espanol.htm"
+  },
+  {
+    "name": "Royal Academy of Arts",
+    "url": "https://www.royalacademy.org.uk/search-results?q=venezuela"
+  },
+  {
+    "name": "Time Out",
+    "url": "https://www.timeout.com/london/search?q=venezuela"
+  },
+  {
+    "name": "Curzon Cinema",
+    "url": "https://homecinema.curzon.com/countries/"
+  },
+  {
+    "name": "Picture House",
+    "url": "https://www.picturehouses.com/whats-on"
+  },
+  {
+    "name": "The Nickel",
+    "url": "https://thenickel.co.uk/calendar"
+  },
+  {
+    "name": "Radio Times - TV Guide",
+    "url": "https://www.radiotimes.com/tv/tv-listings/",
+    "useRenderProxy": true
+  },
+  {
+    "name": "The National Theatre",
+    "url": "https://www.nationaltheatre.org.uk/whats-on/"
+  },
+  {
+    "name": "Manchester Theatres",
+    "url": "https://www.manchestertheatres.com/whatson?search=venezuela"
+  },
+  {
+    "name": "Whats On Stage",
+    "url": "https://www.whatsonstage.com/",
+    "useRenderProxy": true
+  },
+  {
+    "name": "London Fringe",
+    "url": "https://www.londonfringe.uk/"
+  },
+  {
+    "name": "Screen Scotland",
+    "url": "https://www.screen.scot/"
+  },
+  {
+    "name": "Culture 24",
+    "url": "https://www.culture24.org.uk/?s=venezuela"
+  },
+  {
+    "name": "Art Fund",
+    "url": "https://www.artfund.org/",
+    "useRenderProxy": true
+  },
+  {
+    "name": "Art Rabbit",
+    "url": "https://www.artrabbit.com/search?query=venezuela"
+  },
+  {
+    "name": "Galleries Now",
+    "url": "https://www.galleriesnow.net/"
+  },
+  {
+    "name": "Everyman Cinema",
+    "url": "https://www.everymancinema.com/"
+  },
+  {
+    "name": "Cinema Attic Scotland",
+    "url": "https://cinemaattic.com/"
+  },
+  {
+    "name": "Edinburgh Film Festival",
+    "url": "https://www.edfilmfest.org/"
+  },
+  {
+    "name": "Glasgow Film Festival",
+    "url": "https://www.glasgowfilm.org/home"
+  },
+  {
+    "name": "Dochouse",
+    "url": "https://dochouse.org/whats-on/"
+  },
+  {
+    "name": "Showroom Cinema Sheffield",
+    "url": "https://showroomcinema.org.uk/"
+  },
+  {
+    "name": "Leeds Film",
+    "url": "https://www.leedsfilm.com/search?term=venezuela"
+  },
+  {
+    "name": "Today Tix",
+    "url": "https://www.todaytix.com/search?query=venezuela&location=london&sc=true"
+  },
+  {
+    "name": "Bristol",
+    "url": "https://www.headfirstbristol.co.uk/#home"
+  },
+  {
+    "name": "Edinburgh Fringe",
+    "url": "https://www.edfringe.com/search/?term=venezuela&sort=relevance&page=1"
+  },
+  {
+    "name": "Edinburgh",
+    "url": "https://www.whatsoninedinburgh.co.uk/events/"
+  },
+  {
+    "name": "Gig Guide",
+    "url": "https://www.gig-guide.co.uk/listings"
+  },
+  {
+    "name": "Events List",
+    "url": "https://eventslist.co.uk/search?q=venezuela"
+  },
+  {
+    "name": "Brighton",
+    "url": "https://www.visitbrighton.com/information/site-search-results?search=venezuela"
+  },
+  {
+    "name": "Liverpool",
+    "url": "https://www.visitliverpool.com/search/?q=venezuela"
+  },
+  {
+    "name": "Gales",
+    "url": "https://www.visitwales.com/search"
+  },
+  {
+    "name": "Belfast",
+    "url": "https://visitbelfast.com/whats-on/"
+  },
+  {
+    "name": "Manchester",
+    "url": "https://www.visitmanchester.com/search/?q=venezuela"
+  },
+  {
+    "name": "Birmingham",
+    "url": "https://visitbirmingham.com/search/?q=venezuela"
+  },
+  {
+    "name": "Oxford",
+    "url": "https://oxfordcity.co.uk/?s=venezuela"
+  },
+  {
+    "name": "Cambridge",
+    "url": "https://www.visitcambridge.org/whats-on/"
+  },
+  {
+    "name": "Fane",
+    "url": "https://www.fane.co.uk/search-results?search=venezuela"
+  },
+  {
+    "name": "Celtic Connections",
+    "url": "https://www.celticconnections.com/whats-on/"
+  },
+  {
+    "name": "Wales Millennium Centre",
+    "url": "https://www.wmc.org.uk/en/whats-on/"
+  },
+  {
+    "name": "National Galleries of Scotland",
+    "url": "https://www.nationalgalleries.org/"
+  },
+  {
+    "name": "The MAC Belfast",
+    "url": "https://themaclive.com/"
+  },
+  {
+    "name": "La Tundra",
+    "url": "https://www.latundra.com/"
+  },
+  {
+    "name": "El Iberico",
+    "url": "https://www.eliberico.com/eventos/"
+  },
+  {
+    "name": "Latino Life",
+    "url": "https://www.latinolife.co.uk/what-is-on"
+  },
+  {
+    "name": "The Garden Cinema",
+    "url": "https://www.thegardencinema.co.uk/#by-date"
+  },
+  {
+    "name": "London Latino Film Festival",
+    "url": "https://londonlatinofilmfestival.org.uk/"
+  },
+  {
+    "name": "What to Watch",
+    "url": "https://www.whattowatch.com/search?searchTerm=venezuela"
+  },
+  {
+    "name": "TV Guide 2",
+    "url": "https://tvguide.viewersvault.com/"
+  },
+  {
+    "name": "TV Guide",
+    "url": "https://www.tvguide.co.uk/search"
+  },
+  {
+    "name": "Wellcome Collection",
+    "url": "https://wellcomecollection.org/whats-on"
+  },
+  {
+    "name": "Ica Art Films",
+    "url": "https://www.ica.art/upcoming"
+  }
+]
