@@ -1,0 +1,37 @@
+name: Rastreador de Eventos Venezolanos
+
+on:
+  schedule:
+    - cron: "0 4 * * *" # Todos los días a las 04:00 UTC (5am hora de Londres en horario de verano, BST)
+  workflow_dispatch: {} # Permite dispararlo manualmente desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install project dependencies
+        run: npm install @google/generative-ai
+
+      - name: Run Script Extractor with Gemini AI
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node script-extractor.js
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add eventos.json
+          git diff --quiet --cached || git commit -m "🤖 Actualización automática de eventos de Venezuela en UK"
+          git push
