@@ -1,0 +1,48 @@
+name: Eliminar evento
+
+on:
+  workflow_dispatch:
+    inputs:
+      titulo:
+        description: 'Título exacto del evento a eliminar'
+        required: true
+        type: string
+      venue:
+        description: 'Venue (opcional, solo si hay más de un evento con ese mismo título)'
+        required: false
+        type: string
+      confirmacion:
+        description: 'Escribí ELIMINAR (en mayúsculas) para confirmar'
+        required: true
+        type: string
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Eliminar evento
+        env:
+          TITULO: ${{ inputs.titulo }}
+          VENUE: ${{ inputs.venue }}
+          CONFIRMACION: ${{ inputs.confirmacion }}
+        run: node delete-event.js
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "arenin-bot"
+          git config user.email "actions@github.com"
+          if git diff --quiet eventos.json; then
+            echo "Sin cambios en eventos.json"
+          else
+            git add eventos.json
+            git commit -m "Eliminar evento: ${{ inputs.titulo }}"
+            git push
+          fi

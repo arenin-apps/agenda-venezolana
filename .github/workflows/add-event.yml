@@ -1,0 +1,96 @@
+name: Agregar evento manualmente
+
+on:
+  workflow_dispatch:
+    inputs:
+      titulo:
+        description: 'Título del evento'
+        required: true
+        type: string
+      categoria:
+        description: 'Tipo de evento'
+        required: true
+        type: choice
+        options:
+          - Música
+          - Teatro
+          - Deportes
+          - Artes Plásticas
+          - Cine
+          - Comunidad
+          - Workshops
+      fecha_desde:
+        description: 'Fecha de inicio, formato YYYY-MM-DD (ej. 2026-09-20)'
+        required: true
+        type: string
+      fecha_hasta:
+        description: 'Fecha de fin, SOLO si dura varios días (YYYY-MM-DD). Dejar vacío si es un solo día.'
+        required: false
+        type: string
+      venue:
+        description: 'Lugar / recinto'
+        required: true
+        type: string
+      city:
+        description: 'Ciudad'
+        required: true
+        type: string
+      region:
+        description: 'Región (ej. Inglaterra, Escocia, Greater London)'
+        required: true
+        type: string
+      price:
+        description: 'Precio (dejar vacío para que diga "Consultar web")'
+        required: false
+        type: string
+      link:
+        description: 'Link del evento'
+        required: true
+        type: string
+      descripcion:
+        description: 'Descripción breve — TIENE que mencionar explícitamente "Venezuela"/"venezolano"'
+        required: true
+        type: string
+      source:
+        description: 'Nombre del sitio/organización de donde sale esta info'
+        required: true
+        type: string
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Agregar evento
+        env:
+          TITULO: ${{ inputs.titulo }}
+          CATEGORIA: ${{ inputs.categoria }}
+          FECHA_DESDE: ${{ inputs.fecha_desde }}
+          FECHA_HASTA: ${{ inputs.fecha_hasta }}
+          VENUE: ${{ inputs.venue }}
+          CITY: ${{ inputs.city }}
+          REGION: ${{ inputs.region }}
+          PRICE: ${{ inputs.price }}
+          LINK: ${{ inputs.link }}
+          DESCRIPCION: ${{ inputs.descripcion }}
+          SOURCE: ${{ inputs.source }}
+        run: node add-event.js
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "arenin-bot"
+          git config user.email "actions@github.com"
+          if git diff --quiet eventos.json; then
+            echo "Sin cambios en eventos.json"
+          else
+            git add eventos.json
+            git commit -m "Agregar evento manual: ${{ inputs.titulo }}"
+            git push
+          fi

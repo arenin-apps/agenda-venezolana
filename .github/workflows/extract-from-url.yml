@@ -1,0 +1,41 @@
+name: Extraer eventos desde una URL
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL a analizar (ej. link del newsletter de Mailchimp)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  extract-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install project dependencies
+        run: npm install @google/generative-ai
+
+      - name: Extraer eventos de la URL indicada
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NEWSLETTER_URL: ${{ inputs.url }}
+        run: node extract-from-url.js
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add eventos.json
+          git diff --quiet --cached || git commit -m "🤖 Eventos agregados manualmente desde: ${{ inputs.url }}"
+          git push
