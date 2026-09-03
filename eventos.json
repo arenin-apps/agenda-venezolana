@@ -105,6 +105,21 @@
     "source": "SRG (sergius.uk)"
   },
   {
+    "title": "VENenIN Familiar",
+    "type": "unico",
+    "date": "2026-11-15",
+    "endDate": null,
+    "dateLabel": "DOMINGO, 15 DE NOVIEMBRE 2026 - 15:00",
+    "venue": "Metropolis",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar en ticket",
+    "link": "https://buytickets.at/arvenenin/936284",
+    "description": "Fiesta de la comunidad venezolana en Inglaterra con música de DJ Hernan Atencio y gastronomía típica a cargo de Liqui Liqui.",
+    "category": "Comunidad",
+    "source": "venenin.uk"
+  },
+  {
     "title": "Sabor Venezuela",
     "type": "unico",
     "date": "2026-12-13",
