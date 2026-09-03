@@ -33,7 +33,8 @@
   },
   {
     "name": "Southbank Centre",
-    "url": "https://www.southbankcentre.co.uk/"
+    "url": "https://www.southbankcentre.co.uk/",
+    "useRenderProxy": true
   },
   {
     "name": "Como No",
@@ -61,10 +62,6 @@
     "url": "https://artuk.org/visit/whats-on"
   },
   {
-    "name": "Nations Championship Rugby",
-    "url": "https://nationschampionshiprugby.com/en"
-  },
-  {
     "name": "Allianz Stadium Twickenham",
     "url": "https://allianzstadiumtwickenham.com/whats-on"
   },
@@ -79,7 +76,8 @@
   },
   {
     "name": "Rich Mix",
-    "url": "https://richmix.org.uk/search/?query=venezuela"
+    "url": "https://richmix.org.uk/search/?query=venezuela",
+    "useRenderProxy": true
   },
   {
     "name": "Instituto Cervantes Londres",
@@ -87,7 +85,8 @@
   },
   {
     "name": "Royal Academy of Arts",
-    "url": "https://www.royalacademy.org.uk/search-results?q=venezuela"
+    "url": "https://www.royalacademy.org.uk/search-results?q=venezuela",
+    "useRenderProxy": true
   },
   {
     "name": "Time Out",
@@ -133,7 +132,8 @@
   },
   {
     "name": "Culture 24",
-    "url": "https://www.culture24.org.uk/?s=venezuela"
+    "url": "https://www.culture24.org.uk/?s=venezuela",
+    "useRenderProxy": true
   },
   {
     "name": "Art Fund",
@@ -194,7 +194,8 @@
   },
   {
     "name": "Gig Guide",
-    "url": "https://www.gig-guide.co.uk/listings"
+    "url": "https://www.gig-guide.co.uk/listings",
+    "useRenderProxy": true
   },
   {
     "name": "Events List",
@@ -246,7 +247,8 @@
   },
   {
     "name": "National Galleries of Scotland",
-    "url": "https://www.nationalgalleries.org/"
+    "url": "https://www.nationalgalleries.org/",
+    "useRenderProxy": true
   },
   {
     "name": "The MAC Belfast",
@@ -282,7 +284,8 @@
   },
   {
     "name": "TV Guide",
-    "url": "https://www.tvguide.co.uk/search"
+    "url": "https://www.tvguide.co.uk/search",
+    "useRenderProxy": true
   },
   {
     "name": "Wellcome Collection",
