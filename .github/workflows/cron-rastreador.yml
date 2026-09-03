@@ -2,7 +2,7 @@ name: Rastreador de Eventos Venezolanos
 
 on:
   schedule:
-    - cron: "0 4 * * *" # Todos los días a las 04:00 UTC (5am hora de Londres en horario de verano, BST)
+    - cron: "0 5 * * *" # Todos los días a las 05:00 UTC (6am hora de Londres en horario de verano, BST — ajustar a 06:00 UTC cuando Londres vuelva a GMT en octubre)
   workflow_dispatch: {} # Permite dispararlo manualmente desde la pestaña Actions
 
 permissions:
