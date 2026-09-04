@@ -41,26 +41,28 @@ function isValidEvent(evt) {
   );
 }
 
-// Mismo criterio determinístico que la agenda argentina (ver su
-// historial): confiar solo en las instrucciones del prompt no alcanza,
-// el modelo a veces incluye eventos sin relación real con Venezuela
-// justificándolos con términos genéricos ("sudamericano",
-// "latinoamericano"). Este filtro exige que la palabra "venezuela" o
-// "venezolan" (venezolano/venezolana/venezolanos) aparezca
-// literalmente en el título o la descripción del evento.
+// FIX (agosto 2026): confiar solo en las instrucciones del prompt no
+// alcanza — el modelo a veces igual incluye eventos sin relación real
+// con Argentina, justificándolos con términos genéricos como
+// "sudamericano" o "latinoamericano" en vez de nombrar Argentina
+// específicamente (ej. una exhibición de Frida Kahlo, o un "Summer
+// Show" colectivo con un artista brasileño). Este filtro es un
+// respaldo determinístico en el CÓDIGO, no en el prompt: exige que la
+// palabra "argentin" (argentina/argentino/argentinos/Argentine)
+// aparezca literalmente en el título o la descripción del evento. Si
+// no aparece, se descarta sin importar qué haya decidido el modelo.
 //
-// Todavía no hay fuentes comunitarias venezolanas cargadas como
-// excepción — si en el futuro se agrega una organización 100%
-// comunitaria (equivalente a Anglo Argentine Society/APARU para la
-// agenda argentina), sumala acá.
-const FUENTES_EXCEPTUADAS = [];
+// Fuentes comunitarias (Anglo Argentine Society, APARU) están
+// exceptuadas porque sus eventos son válidos por definición aunque el
+// texto puntual de cada actividad no repita la palabra "Argentina".
+const FUENTES_EXCEPTUADAS = ["anglo argentine society", "aparu"];
 
-function mentionsVenezuela(evt) {
+function mentionsArgentina(evt) {
   const source = normalizeText(evt.source);
   if (FUENTES_EXCEPTUADAS.some((f) => source.includes(f))) return true;
 
   const text = normalizeText(`${evt.title || ""} ${evt.description || ""}`);
-  return /venezuela|venezolan/.test(text);
+  return /argentin/.test(text);
 }
 
 // --- Limpieza de HTML crudo a texto plano ------------------------------
@@ -136,81 +138,99 @@ function normalizeText(str) {
     .trim();
 }
 
-// FIX 2: el título puede venir redactado de formas MUY distintas para el
-// mismo evento puntual (ej. "ENG VS VEN" vs "England vs Venezuela (ENG vs
-// VEN)" vs "England vs Venezuela" — mismo partido, mismo venue, misma
-// fecha exacta). Para eventos de una sola fecha, venue+fecha es una señal
-// mucho más confiable que el título. Si no hay venue, usamos título+fecha
-// como respaldo.
+// Compara dos textos ignorando el orden de las palabras — para casos
+// como "Institute of Contemporary Arts (ICA)" vs "ICA (Institute of
+// Contemporary Arts)": mismas palabras, orden distinto, texto igual en
+// la práctica.
+function sameWordsIgnoringOrder(a, b) {
+  const na = normalizeText(a);
+  const nb = normalizeText(b);
+  if (!na || !nb) return false;
+  if (na === nb) return true;
+  return na.split(" ").sort().join(" ") === nb.split(" ").sort().join(" ");
+}
+
+// FIX (septiembre 2026): el esquema anterior armaba UNA sola clave por
+// evento (venue+fecha, o temporada:venue+título) y comparaba por
+// igualdad exacta de esa clave. Eso se rompía en dos casos reales:
+//   1. El venue viene con las mismas palabras pero en otro orden entre
+//      una corrida y otra (ej. "Institute of Contemporary Arts (ICA)"
+//      vs "ICA (Institute of Contemporary Arts)") — normalizeText no
+//      reordena palabras, así que "Institute of Contemporary Arts ICA"
+//      y "ICA Institute of Contemporary Arts" quedaban como venues
+//      distintos y el evento se duplicaba.
+//   2. Gemini extrae el venue equivocado en una de las dos corridas
+//      (ej. "No Te Va Gustar" en "O2 Shepherd's Bush Empire" un día y
+//      en "Dingwalls" al día siguiente) — venue+fecha nunca iba a
+//      matchear ahí, porque el venue en sí está mal en una de las dos.
 //
-// FIX 3 (agosto 2026): para eventos de tipo "temporada" (exposiciones
-// largas), la fecha extraída puede variar día a día si la fuente muestra
-// un calendario de "próximas sesiones" en vez de una sola fecha de
-// apertura — eso hacía que venue+fecha generara una clave distinta cada
-// vez y el evento se duplicara sin parar (ej. "Julio Le Parc" en Tate
-// Modern). Para "temporada" ignoramos la fecha por completo: la clave es
-// solo venue+título (o título solo, si no hay venue), así el mismo
-// evento siempre matchea sin importar qué fecha haya traído el scraper
-// ese día.
-function eventKey(evt) {
-  const venue = normalizeText(evt.venue);
-  const title = normalizeText(evt.title);
+// Ahora, en vez de una clave única, se escanea comparando por MÚLTIPLES
+// señales: alcanza con que coincida el venue (sin importar el orden de
+// palabras) O el título, siempre que la fecha sea la misma. Cualquiera
+// de las dos señales sola ya es suficiente evidencia de que es el mismo
+// evento — así se cubren ambos casos de arriba sin perder precisión en
+// los casos que ya funcionaban bien.
+function findDuplicate(existing, candidate) {
+  const candTitle = candidate.title;
+  const candVenue = candidate.venue;
 
-  if (evt.type === "temporada") {
-    return venue ? `season:${venue}_${title}` : `season-title:${title}`;
+  if (candidate.type === "temporada") {
+    return existing.find((e) => {
+      if (e.type !== "temporada") return false;
+      if (!sameWordsIgnoringOrder(e.title, candTitle)) return false;
+      // Si ambos tienen venue cargado, tiene que matchear también; si a
+      // alguno le falta, con el título coincidiendo alcanza.
+      if (e.venue && candVenue) return sameWordsIgnoringOrder(e.venue, candVenue);
+      return true;
+    });
   }
 
-  if (venue) {
-    return `venue:${venue}_${evt.date}`;
-  }
-  return `title:${title}_${evt.date}`;
+  return existing.find((e) => {
+    if (e.type === "temporada") return false;
+    if (e.date !== candidate.date) return false;
+    const venueMatch = e.venue && candVenue && sameWordsIgnoringOrder(e.venue, candVenue);
+    const titleMatch = sameWordsIgnoringOrder(e.title, candTitle);
+    return venueMatch || titleMatch;
+  });
 }
 
 // Combina eventos existentes con nuevos, descarta duplicados y ordena
 // cronológicamente antes de guardar.
 //
-// FIX (agosto 2026): para eventos de temporada que ya existen, no se
-// agrega una copia nueva (gracias a eventKey ignorando la fecha), pero
-// además: si el registro existente no tenía "endDate" todavía y la
+// Para eventos de temporada que ya existen: no se agrega una copia
+// nueva, pero si el registro existente no tenía "endDate" todavía y la
 // nueva extracción sí la trae, se completa — sin pisar la fecha de
 // apertura original ("date") que ya estaba guardada.
 function mergeAndSave(existingEvents, newEvents) {
-  const map = new Map();
-  existingEvents.forEach((evt) => {
-    if (isValidEvent(evt)) map.set(eventKey(evt), evt);
-  });
-
+  const result = existingEvents.filter(isValidEvent);
   let addedCount = 0;
   let seasonUpdatedCount = 0;
 
   newEvents.forEach((evt) => {
     if (!isValidEvent(evt)) return;
-    const key = eventKey(evt);
 
-    if (!map.has(key)) {
-      map.set(key, evt);
+    const dup = findDuplicate(result, evt);
+
+    if (!dup) {
+      result.push(evt);
       addedCount++;
       return;
     }
 
-    // Ya existe un evento con esta clave.
     if (evt.type === "temporada") {
-      const existing = map.get(key);
-      if (!existing.endDate && evt.endDate) {
+      if (!dup.endDate && evt.endDate) {
         // Completamos endDate, pero conservamos todo lo demás del
         // registro existente (sobre todo "date", la apertura original).
-        map.set(key, { ...existing, endDate: evt.endDate });
+        dup.endDate = evt.endDate;
         seasonUpdatedCount++;
       }
     }
-    // Si no es temporada, es un duplicado puntual exacto: se ignora,
-    // igual que antes.
+    // Si no es temporada, es un duplicado: se ignora.
   });
 
-  const merged = Array.from(map.values());
-  merged.sort((a, b) => new Date(a.date) - new Date(b.date));
-  fs.writeFileSync(EVENTOS_PATH, JSON.stringify(merged, null, 2), "utf-8");
-  return { total: merged.length, added: addedCount, seasonUpdated: seasonUpdatedCount };
+  result.sort((a, b) => new Date(a.date) - new Date(b.date));
+  fs.writeFileSync(EVENTOS_PATH, JSON.stringify(result, null, 2), "utf-8");
+  return { total: result.length, added: addedCount, seasonUpdated: seasonUpdatedCount };
 }
 
 // Pausa entre solicitudes para respetar el límite de 5/minuto del nivel
@@ -233,7 +253,7 @@ module.exports = {
   getDateWindow,
   isWithinWindow,
   isValidEvent,
-  mentionsVenezuela,
+  mentionsArgentina,
   cleanHTML,
   stripMarkdownJson,
   readEventos,
