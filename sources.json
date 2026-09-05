@@ -274,7 +274,8 @@
   },
   {
     "name": "TV Guide 2",
-    "url": "https://tvguide.viewersvault.com/"
+    "url": "https://tvguide.viewersvault.com/",
+    "useRenderProxy": true
   },
   {
     "name": "TV Guide",

@@ -43,26 +43,24 @@ function isValidEvent(evt) {
 
 // FIX (agosto 2026): confiar solo en las instrucciones del prompt no
 // alcanza — el modelo a veces igual incluye eventos sin relación real
-// con Argentina, justificándolos con términos genéricos como
-// "sudamericano" o "latinoamericano" en vez de nombrar Argentina
-// específicamente (ej. una exhibición de Frida Kahlo, o un "Summer
-// Show" colectivo con un artista brasileño). Este filtro es un
-// respaldo determinístico en el CÓDIGO, no en el prompt: exige que la
-// palabra "argentin" (argentina/argentino/argentinos/Argentine)
-// aparezca literalmente en el título o la descripción del evento. Si
-// no aparece, se descarta sin importar qué haya decidido el modelo.
+// con Venezuela, justificándolos con términos genéricos como
+// "sudamericano" o "latinoamericano" en vez de nombrar Venezuela
+// específicamente. Este filtro es un respaldo determinístico en el
+// CÓDIGO, no en el prompt: exige que la palabra "venezuela" o
+// "venezolan" (venezolano/venezolana/venezolanos) aparezca
+// literalmente en el título o la descripción del evento. Si no
+// aparece, se descarta sin importar qué haya decidido el modelo.
 //
-// Fuentes comunitarias (Anglo Argentine Society, APARU) están
-// exceptuadas porque sus eventos son válidos por definición aunque el
-// texto puntual de cada actividad no repita la palabra "Argentina".
-const FUENTES_EXCEPTUADAS = ["anglo argentine society", "aparu"];
+// Todavía no hay fuentes comunitarias venezolanas exceptuadas (el
+// equivalente a Anglo Argentine Society/APARU en la agenda argentina).
+const FUENTES_EXCEPTUADAS = [];
 
-function mentionsArgentina(evt) {
+function mentionsVenezuela(evt) {
   const source = normalizeText(evt.source);
   if (FUENTES_EXCEPTUADAS.some((f) => source.includes(f))) return true;
 
   const text = normalizeText(`${evt.title || ""} ${evt.description || ""}`);
-  return /argentin/.test(text);
+  return /venezuela|venezolan/.test(text);
 }
 
 // --- Limpieza de HTML crudo a texto plano ------------------------------
@@ -253,7 +251,7 @@ module.exports = {
   getDateWindow,
   isWithinWindow,
   isValidEvent,
-  mentionsArgentina,
+  mentionsVenezuela,
   cleanHTML,
   stripMarkdownJson,
   readEventos,
