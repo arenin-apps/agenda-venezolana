@@ -76,8 +76,7 @@
   },
   {
     "name": "Rich Mix",
-    "url": "https://richmix.org.uk/search/?query=venezuela",
-    "useRenderProxy": true
+    "url": "https://richmix.org.uk/search/?query=venezuela"
   },
   {
     "name": "Instituto Cervantes Londres",
@@ -191,11 +190,6 @@
   {
     "name": "Edinburgh",
     "url": "https://www.whatsoninedinburgh.co.uk/events/"
-  },
-  {
-    "name": "Gig Guide",
-    "url": "https://www.gig-guide.co.uk/listings",
-    "useRenderProxy": true
   },
   {
     "name": "Events List",
