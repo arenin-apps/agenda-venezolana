@@ -105,7 +105,7 @@
   },
   {
     "name": "Radio Times - TV Guide",
-    "url": "https://www.radiotimes.com/tv/tv-listings/",
+    "url": "https://www.radiotimes.com/search/?q=venezuela",
     "useRenderProxy": true
   },
   {
@@ -271,16 +271,6 @@
   {
     "name": "What to Watch",
     "url": "https://www.whattowatch.com/search?searchTerm=venezuela"
-  },
-  {
-    "name": "TV Guide 2",
-    "url": "https://tvguide.viewersvault.com/",
-    "useRenderProxy": true
-  },
-  {
-    "name": "TV Guide",
-    "url": "https://www.tvguide.co.uk/search",
-    "useRenderProxy": true
   },
   {
     "name": "Wellcome Collection",
