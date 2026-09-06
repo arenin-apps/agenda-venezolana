@@ -55,6 +55,7 @@ function buildPrompt(url, cleanText, existingTitlesAndDates) {
     Ejemplo de lo que NO hay que incluir: una exhibición de Frida Kahlo (mexicana, sin vínculo venezolano) no califica aunque el texto la describa como "arte latinoamericano".
     Si tenés dudas sobre si el vínculo es lo bastante específico, EXCLUÍ el evento — es preferible perder un evento dudoso que ensuciar la agenda con eventos sin relación real.
     También excluí exhibiciones colectivas o "shows" genéricos de una galería salvo que el texto mencione explícitamente algún artista o pieza con conexión venezolana específica dentro de esa muestra.
+    IMPORTANTE: si al redactar la "description" de un evento notás que estás aclarando que NO tiene vínculo específico con Venezuela (o que se incluye "de todos modos", "por las dudas", etc.), eso es la señal de que tenés que EXCLUIR ese evento del arreglo de salida — nunca lo incluyas con una aclaración de ese tipo.
 
     Reglas estrictas:
     1. El evento debe ocurrir estrictamente entre el ${REFERENCE_DATE} (hoy) y el ${MAX_DATE} (dentro de 6 meses), CON UNA EXCEPCIÓN: los eventos de tipo "temporada" (ver regla 2) son válidos aunque su fecha de apertura ("date") sea anterior a hoy, siempre que su fecha de cierre ("endDate") no haya pasado todavía. Descarta todo evento puntual pasado o posterior a la ventana.
