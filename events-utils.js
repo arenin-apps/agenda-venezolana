@@ -136,6 +136,16 @@ function normalizeText(str) {
     .trim();
 }
 
+// El link a la página del evento es una señal de identidad mucho más
+// confiable que título/venue cuando se trata de reconocer funciones
+// sueltas de la misma temporada: Gemini re-redacta el título y el
+// venue de forma distinta en cada corrida (ej. "ICA" vs "Institute of
+// Contemporary Arts (Cinema 1)"), pero el link a la ficha del evento
+// suele ser idéntico.
+function normalizeLink(url) {
+  return (url || "").trim().replace(/\/+$/, "").toLowerCase();
+}
+
 // Compara dos textos ignorando el orden de las palabras — para casos
 // como "Institute of Contemporary Arts (ICA)" vs "ICA (Institute of
 // Contemporary Arts)": mismas palabras, orden distinto, texto igual en
@@ -184,7 +194,16 @@ function findDuplicate(existing, candidate) {
   }
 
   return existing.find((e) => {
-    if (e.type === "temporada") return false;
+    if (e.type === "temporada") {
+      // Una función suelta del mismo show no es un evento nuevo: es
+      // parte de la temporada que ya se guardó (ver mergeAndSave, que
+      // además usa esto para extender "endDate"). El link a la ficha
+      // del evento es la señal más confiable acá — título y venue
+      // vienen redactados distinto en cada corrida.
+      if (e.link && candidate.link && normalizeLink(e.link) === normalizeLink(candidate.link)) return true;
+      if (!e.venue || !candVenue) return false;
+      return sameWordsIgnoringOrder(e.title, candTitle) && sameWordsIgnoringOrder(e.venue, candVenue);
+    }
     if (e.date !== candidate.date) return false;
     const venueMatch = e.venue && candVenue && sameWordsIgnoringOrder(e.venue, candVenue);
     const titleMatch = sameWordsIgnoringOrder(e.title, candTitle);
@@ -222,8 +241,15 @@ function mergeAndSave(existingEvents, newEvents) {
         dup.endDate = evt.endDate;
         seasonUpdatedCount++;
       }
+    } else if (dup.type === "temporada" && evt.date && dup.endDate && evt.date > dup.endDate) {
+      // Una función suelta del mismo show/venue con fecha posterior al
+      // cierre conocido: la temporada sigue vigente más de lo que
+      // sabíamos, extendemos "endDate" en vez de agregarla como evento
+      // aparte.
+      dup.endDate = evt.date;
+      seasonUpdatedCount++;
     }
-    // Si no es temporada, es un duplicado: se ignora.
+    // En cualquier otro caso es un duplicado: se ignora.
   });
 
   result.sort((a, b) => new Date(a.date) - new Date(b.date));
