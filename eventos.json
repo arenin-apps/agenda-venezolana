@@ -90,6 +90,36 @@
     "source": "Institute of Contemporary Arts"
   },
   {
+    "title": "Pasta Negra",
+    "type": "unico",
+    "date": "2026-10-03",
+    "endDate": null,
+    "dateLabel": "SÁBADO, 03 DE OCTUBRE 2026 - 12:15",
+    "venue": "ICA (Institute of Contemporary Arts) - Cinema 2",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://lolaff2026.eventive.org/films/pasta-negra-6a84cfd493e9428e10d3c5e1",
+    "description": "Proyección en el London Latino Film Festival. Tres mujeres venezolanas cruzan la frontera hacia Colombia en busca de un paquete de pasta, un relato de migración y resiliencia.",
+    "category": "Cine",
+    "source": "London Latino Film Festival"
+  },
+  {
+    "title": "Bea",
+    "type": "unico",
+    "date": "2026-10-05",
+    "endDate": null,
+    "dateLabel": "LUNES, 05 DE OCTUBRE 2026 - 18:45",
+    "venue": "Barbican Centre - Cinema 3",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://lolaff2026.eventive.org/films/6a7ed5d78e4c26abba70441c",
+    "description": "Proyección en el London Latino Film Festival. Cortometraje sobre Bea, una joven inmigrante venezolana que aprende a lidiar con lo que dejó atrás mientras descubre nuevas esperanzas en París.",
+    "category": "Cine",
+    "source": "London Latino Film Festival"
+  },
+  {
     "title": "Ricardo Montaner • London",
     "type": "unico",
     "date": "2026-10-17",
