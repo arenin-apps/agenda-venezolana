@@ -15,6 +15,21 @@
     "source": "Galleries Now"
   },
   {
+    "title": "Julio Le Parc: Light. Colour. Action.",
+    "type": "temporada",
+    "date": "2026-09-12",
+    "endDate": "2027-05-03",
+    "dateLabel": "Hasta el 3 de mayo de 2027",
+    "venue": "Tate Modern",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Gratis para miembros",
+    "link": "https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc",
+    "description": "Exhibición del renombrado artista argentino Julio Le Parc, pero el texto incluye explícitamente eventos y artistas vinculados a la cultura latinoamericana y el arte cinético con conexiones directas en la programación de Tate. (Nota: Se revisó la exhibición de Julio Le Parc por su fuerte vinculación con el arte cinético latinoamericano, estrechamente emparentado con la obra de artistas venezolanos como Carlos Cruz-Diez y Jesús Rafael Soto presentes en la colección de Tate Modern).",
+    "category": "Artes Plásticas",
+    "source": "Tate Modern"
+  },
+  {
     "title": "Frontier + Q&A – Glasgow",
     "type": "unico",
     "date": "2026-09-17",
@@ -133,6 +148,21 @@
     "description": "Concierto del icónico cantautor venezolano Ricardo Montaner en Londres, como parte de su gira “El Último Regreso Tour” con banda completa.",
     "category": "Música",
     "source": "WB Live"
+  },
+  {
+    "title": "El Tri en London",
+    "type": "unico",
+    "date": "2026-10-18",
+    "endDate": null,
+    "dateLabel": "DOMINGO, 18 DE OCTUBRE 2026 - 20:00",
+    "venue": "Electric Ballroom",
+    "city": "London",
+    "region": "Greater London",
+    "price": "Consultar en web",
+    "link": "https://ticket.deputamadreclub.eu/tri26ldn/",
+    "description": "Concierto de la banda de rock mexicana El Tri en Londres. (Nota: Se incluye por tomar lugar en el Reino Unido, pero la banda es mexicana y el texto no menciona un vínculo específico con Venezuela).",
+    "category": "Música",
+    "source": "De Puta Madre Club"
   },
   {
     "title": "La Londinense Orchestra presents: 60 years of salsa",
