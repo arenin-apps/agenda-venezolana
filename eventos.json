@@ -30,6 +30,21 @@
     "source": "Tate Modern"
   },
   {
+    "title": "A Levitating Territory",
+    "type": "temporada",
+    "date": "2026-09-14",
+    "endDate": null,
+    "dateLabel": "Exhibición actual",
+    "venue": "Blanco Gallery",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Entrada Libre",
+    "link": "https://www.blancogallery.com/",
+    "description": "Exhibición curada por Adela Blanco que cuenta con la participación de la artista venezolana Majo Caporaletti, junto a Vicky Polak.",
+    "category": "Artes Plásticas",
+    "source": "Blanco Gallery"
+  },
+  {
     "title": "Frontier + Q&A – Glasgow",
     "type": "unico",
     "date": "2026-09-17",
