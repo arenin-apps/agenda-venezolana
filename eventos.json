@@ -60,6 +60,21 @@
     "source": "Cinema Attic Scotland"
   },
   {
+    "title": "Barrio Triste",
+    "type": "temporada",
+    "date": "2026-09-18",
+    "endDate": "2026-09-19",
+    "dateLabel": "Funciones del 18 al 19 de septiembre de 2026",
+    "venue": "Institute of Contemporary Arts (ICA)",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.ica.art/films/barrio-triste",
+    "description": "Proyección de la película Barrio Triste dirigida por Stillz, la cual cuenta con una banda sonora original compuesta por la reconocida artista y productora venezolana Arca.",
+    "category": "Cine",
+    "source": "Ica Art Films"
+  },
+  {
     "title": "Venezuela Earthquake Appeal Fundraiser",
     "type": "unico",
     "date": "2026-09-19",
@@ -118,6 +133,21 @@
     "description": "Noche de concurso y música con fines benéficos para Venezuela.",
     "category": "Comunidad",
     "source": "Events List"
+  },
+  {
+    "title": "Binomio de Oro de América",
+    "type": "unico",
+    "date": "2026-09-26",
+    "endDate": null,
+    "dateLabel": "SÁBADO, 26 DE SEPTIEMBRE 2026 - 19:30",
+    "venue": "Electric Brixton",
+    "city": "London",
+    "region": "England",
+    "price": "Consultar web",
+    "link": "https://www.wblive.co.uk/events/binomio-de-oro-de-america",
+    "description": "Celebración de los 50 años de historia del vallenato con Binomio de Oro de América en su Gira Europea de Aniversario, con arraigo y gran popularidad en Venezuela y Colombia.",
+    "category": "Música",
+    "source": "WB Live"
   },
   {
     "title": "Bodies Adrift: Miami",
