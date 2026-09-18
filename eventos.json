@@ -1,5 +1,20 @@
 [
   {
+    "title": "Latin Connections 2026: From Our Shore to Yours",
+    "type": "temporada",
+    "date": "2026-05-09",
+    "endDate": null,
+    "dateLabel": "Desde el 9 de mayo de 2026",
+    "venue": "Cinema Attic Scotland",
+    "city": "Edimburgo / Glasgow",
+    "region": "Escocia",
+    "price": "Consultar web",
+    "link": "https://cinemaattic.com/latinconnections2026/",
+    "description": "Festival de cine que incluye historias de barrios urbanos en Venezuela, explorando el sentido de pertenencia y los paisajes.",
+    "category": "Cine",
+    "source": "Cinema Attic Scotland"
+  },
+  {
     "title": "Jesús Rafael Soto: Pénétrable BBL Jaune",
     "type": "temporada",
     "date": "2026-06-16",
@@ -73,6 +88,21 @@
     "description": "Proyección de la película Barrio Triste dirigida por Stillz, la cual cuenta con una banda sonora original compuesta por la reconocida artista y productora venezolana Arca.",
     "category": "Cine",
     "source": "Ica Art Films"
+  },
+  {
+    "title": "RAWAYANA @ Brixton Academy",
+    "type": "unico",
+    "date": "2026-09-18",
+    "endDate": null,
+    "dateLabel": "Próximamente",
+    "venue": "Brixton Academy",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.latinolife.co.uk/event/rawayana-brixton-academy",
+    "description": "Concierto de Rawayana, la banda musical más grande de Venezuela y ganadora de premios GRAMMY y Latin GRAMMY, presentándose en Londres.",
+    "category": "Música",
+    "source": "Latino Life"
   },
   {
     "title": "Venezuela Earthquake Appeal Fundraiser",
