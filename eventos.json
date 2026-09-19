@@ -120,6 +120,21 @@
     "source": "Events List"
   },
   {
+    "title": "RAWAYANA @ Brixton Academy",
+    "type": "unico",
+    "date": "2026-09-19",
+    "endDate": null,
+    "dateLabel": "Próximamente",
+    "venue": "Brixton Academy",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar",
+    "link": "https://www.latinolife.co.uk/event/rawayana-brixton-academy",
+    "description": "Concierto de la exitosa banda venezolana Rawayana, ganadora de premios GRAMMY y Latin GRAMMY, considerada una de las agrupaciones musicales más importantes de Venezuela.",
+    "category": "Música",
+    "source": "Latino Life"
+  },
+  {
     "title": "Frontier + Q&A – Edinburgh",
     "type": "unico",
     "date": "2026-09-21",
@@ -133,6 +148,21 @@
     "description": "Proyección de la película 'Frontier' (Frontera) acompañada de un espacio de Q&A, centrada en el contexto sociopolítico y las vivencias en la frontera entre Colombia y Venezuela.",
     "category": "Cine",
     "source": "Cinema Attic Scotland"
+  },
+  {
+    "title": "Rawayana @ O2 Academy Brixton",
+    "type": "unico",
+    "date": "2026-09-21",
+    "endDate": null,
+    "dateLabel": "LUNES, 21 DE SEPTIEMBRE 2026",
+    "venue": "O2 Academy Brixton",
+    "city": "Londres",
+    "region": "Greater London",
+    "price": "Consultar web",
+    "link": "https://eventslist.co.uk/london/events/rawayana-o2-academy-brixton-2026-09-21",
+    "description": "Concierto de Rawayana, reconocida banda de música alternativa originaria de Venezuela.",
+    "category": "Música",
+    "source": "Events List"
   },
   {
     "title": "Fundraiser for Venezuela",
@@ -283,6 +313,21 @@
     "description": "El reconocido comediante venezolano El Profesor Briceño llega a Londres con “Bueno y Sano”, un show de comedia sobre redes sociales, vidas perfectas y la imposibilidad de ser bueno hoy.",
     "category": "Teatro",
     "source": "SRG (sergius.uk)"
+  },
+  {
+    "title": "Dances of Universal Peace: Holding Venezuela in the Light",
+    "type": "unico",
+    "date": "2026-10-31",
+    "endDate": null,
+    "dateLabel": "SÁBADO, 31 DE OCTUBRE 2026",
+    "venue": "Reading Quaker (Friends) Meeting House",
+    "city": "Reading",
+    "region": "Berkshire",
+    "price": "Entrada Libre",
+    "link": "https://eventslist.co.uk/reading/events/dances-of-universal-peace-holding-venezuela-in-the-light-2026-10-31",
+    "description": "Encuentro de danzas y meditación enfocado específicamente en enviar apoyo y pensamientos hacia Venezuela.",
+    "category": "Comunidad",
+    "source": "Events List"
   },
   {
     "title": "VENenIN Familiar",
