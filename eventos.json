@@ -180,6 +180,21 @@
     "source": "Events List"
   },
   {
+    "title": "Barrio Triste",
+    "type": "temporada",
+    "date": "2026-09-22",
+    "endDate": "2026-09-25",
+    "dateLabel": "Funciones hasta el 25 de septiembre de 2026",
+    "venue": "ICA",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.ica.art/films/barrio-triste",
+    "description": "Proyecciones de la película Barrio Triste dirigida por Stillz, con una banda sonora original compuesta por la artista venezolana Arca.",
+    "category": "Cine",
+    "source": "Ica Art Films"
+  },
+  {
     "title": "Fundraiser for Venezuela",
     "type": "unico",
     "date": "2026-09-26",
@@ -253,6 +268,21 @@
     "description": "Proyección en el London Latino Film Festival. Tres mujeres venezolanas cruzan la frontera hacia Colombia en busca de un paquete de pasta, un relato de migración y resiliencia.",
     "category": "Cine",
     "source": "London Latino Film Festival"
+  },
+  {
+    "title": "Vente Birmingham: Unidos y Organizados por Venezuela",
+    "type": "temporada",
+    "date": "2026-10-03",
+    "endDate": "2026-10-04",
+    "dateLabel": "Del 3 al 4 de octubre de 2026",
+    "venue": "Colombia Picada Mix",
+    "city": "Birmingham",
+    "region": "West Midlands",
+    "price": "Entrada Libre",
+    "link": "https://eventslist.co.uk/birmingham/events/vente-birmingham-unidos-y-organizados-por-venezuela",
+    "description": "Encuentro comunitario y organizativo enfocado en la comunidad venezolana.",
+    "category": "Comunidad",
+    "source": "Events List"
   },
   {
     "title": "Bea",
