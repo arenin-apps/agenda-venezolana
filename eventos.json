@@ -93,7 +93,7 @@
     "title": "Barrio Triste",
     "type": "temporada",
     "date": "2026-09-18",
-    "endDate": "2026-09-19",
+    "endDate": "2026-09-27",
     "dateLabel": "Funciones del 18 al 19 de septiembre de 2026",
     "venue": "Institute of Contemporary Arts (ICA)",
     "city": "Londres",
@@ -210,6 +210,21 @@
     "source": "Latino Life"
   },
   {
+    "title": "Cinema Mentiré: Restored Cuban and Venezuelan shorts BODIES ADRIFT @ The ICA",
+    "type": "unico",
+    "date": "2026-09-25",
+    "endDate": null,
+    "dateLabel": "PRÓXIMAMENTE",
+    "venue": "The ICA",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.latinolife.co.uk/event/cinema-mentire-restored-cuban-and-venezuelan-shorts-bodies-adrift-ica",
+    "description": "Proyección de cortometrajes experimentales restaurados que incluye obras con vinculación venezolana, organizada por Cinema Mentiré en el Institute of Contemporary Arts (ICA) de Londres.",
+    "category": "Cine",
+    "source": "Latino Life"
+  },
+  {
     "title": "Fundraiser for Venezuela",
     "type": "unico",
     "date": "2026-09-26",
@@ -268,6 +283,21 @@
     "description": "Proyección que incluye el documental venezolano 'Mayami Nuestro' (1981) de Carlos Oteyza, el cual explora la comunidad migrante venezolana en Miami.",
     "category": "Cine",
     "source": "Institute of Contemporary Arts"
+  },
+  {
+    "title": "Bodies Adrift: Miami (Incluye Mayami Nuestro)",
+    "type": "unico",
+    "date": "2026-09-27",
+    "endDate": null,
+    "dateLabel": "DOMINGO, 27 DE SEPTIEMBRE 2026 - 5:30 PM",
+    "venue": "ICA",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.ica.art/films/bodies-adrift-miami",
+    "description": "Proyección que incluye 'Mayami Nuestro', un documental venezolano recientemente restaurado dirigido por Carlos Oteyza, que retrata comunidades de la diáspora latinoamericana en Miami junto al cortometraje cubano 'Tent City'.",
+    "category": "Cine",
+    "source": "Ica Art Films"
   },
   {
     "title": "Pasta Negra",
