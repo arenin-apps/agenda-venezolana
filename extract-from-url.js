@@ -113,6 +113,23 @@ function passesWindow(event) {
   return isWithinWindow(event.date, REFERENCE_DATE, MAX_DATE);
 }
 
+const MARCADORES_VERIFICACION = [
+  "performing security verification",
+  "security service to protect against malicious bots",
+  "verify you are human",
+  "verifying you are human",
+  "checking if the site connection is secure",
+  "enable javascript and cookies to continue",
+  "checking your browser before accessing"
+];
+
+// Detecta pantallas anti-bots (ej. Cloudflare "Just a moment...") que el sitio
+// devuelve en lugar del contenido real, para no mandarlas a Gemini.
+function esPaginaDeVerificacion(texto) {
+  const t = (texto || "").toLowerCase();
+  return MARCADORES_VERIFICACION.some((m) => t.includes(m));
+}
+
 async function extractFromUrl() {
   console.log(`🚀 Procesando URL: ${targetUrl}`);
   console.log(`📅 Ventana válida: ${REFERENCE_DATE} a ${MAX_DATE}`);
@@ -135,6 +152,7 @@ async function extractFromUrl() {
     const CHAR_LIMIT = 40000;
     let cleanText = cleanHTML(rawHtml, targetUrl).substring(0, CHAR_LIMIT);
     console.log(`🧹 Texto limpio: ${cleanText.length} caracteres (límite: ${CHAR_LIMIT}).`);
+    const textoInicial = cleanText;
 
     // FIX (agosto 2026): muchos sitios de venta de entradas (ej.
     // enterticket.es) son aplicaciones de una sola página (SPA) que
@@ -168,6 +186,11 @@ async function extractFromUrl() {
 
     if (cleanText.length < 200) {
       console.log(`⚠️ El texto limpio sigue siendo muy corto tras el reintento — es probable que la página no tenga contenido de texto accesible de ninguna forma (todo en imágenes, requiere login, o bloquea bots).`);
+    }
+
+    if (cleanText.length < 6000 && (esPaginaDeVerificacion(cleanText) || (cleanText === textoInicial && esPaginaDeVerificacion(rawHtml)))) {
+      console.error("🚫 El sitio devolvió una pantalla de verificación anti-bots, no el contenido del evento. La lectura automática está bloqueada para esta URL. Cargá el evento a mano con \"Agregar evento manualmente\".");
+      process.exit(1);
     }
 
     const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
