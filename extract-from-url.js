@@ -163,8 +163,8 @@ async function extractFromUrl() {
     // través de un proxy de renderizado (mismo servicio que ya usás
     // para fuentes con "useRenderProxy": true en sources.json), que sí
     // ejecuta el JavaScript antes de devolver el HTML.
-    if (cleanText.length < 400) {
-      console.log(`⚠️ El texto limpio es muy corto — probablemente la página requiere JavaScript. Reintentando con proxy de renderizado...`);
+    if (cleanText.length < 3000) {
+      console.log(`⚠️ El texto limpio es corto — probablemente la página arma su contenido con JavaScript. Reintentando con proxy de renderizado...`);
       try {
         const proxyResponse = await fetch(`https://r.jina.ai/${targetUrl}`, {
           headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" }
