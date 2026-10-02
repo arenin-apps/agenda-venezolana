@@ -360,6 +360,21 @@
     "source": "Events List"
   },
   {
+    "title": "Once Upon a Time in Venezuela",
+    "type": "unico",
+    "date": "2026-10-04",
+    "endDate": null,
+    "dateLabel": "DOMINGO, 4 DE OCTUBRE 2026 - 15:30",
+    "venue": "Central Film School",
+    "city": "Clapham, London",
+    "region": "London",
+    "price": "£15",
+    "link": "https://passengercinema.com/screenings.html",
+    "description": "Proyección del documental venezolano 'Once Upon a Time in Venezuela' de Anabel Rodríguez Ríos, con música en vivo de cuatro a cargo de Rodrian Ramirez. Todos los ingresos de las entradas se destinan a la ayuda para los afectados por el terremoto en Venezuela.",
+    "category": "Cine",
+    "source": "Passenger Cinema"
+  },
+  {
     "title": "Bea",
     "type": "unico",
     "date": "2026-10-05",
