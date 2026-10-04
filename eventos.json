@@ -78,7 +78,7 @@
     "title": "Barrio Triste",
     "type": "temporada",
     "date": "2026-09-18",
-    "endDate": "2026-09-27",
+    "endDate": "2026-10-05",
     "dateLabel": "Funciones del 18 al 19 de septiembre de 2026",
     "venue": "Institute of Contemporary Arts (ICA)",
     "city": "Londres",
@@ -373,6 +373,21 @@
     "description": "Proyección del documental venezolano 'Once Upon a Time in Venezuela' de Anabel Rodríguez Ríos, con música en vivo de cuatro a cargo de Rodrian Ramirez. Todos los ingresos de las entradas se destinan a la ayuda para los afectados por el terremoto en Venezuela.",
     "category": "Cine",
     "source": "Passenger Cinema"
+  },
+  {
+    "title": "Julio Le Parc: Light. Colour. Action.",
+    "type": "temporada",
+    "date": "2026-10-04",
+    "endDate": "2027-05-03",
+    "dateLabel": "Hasta el 3 de mayo de 2027",
+    "venue": "Tate Modern",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Gratis para miembros",
+    "link": "https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc",
+    "description": "Exhibición del renombrado artista cinético y óptico argentino Julio Le Parc, quien desarrolló gran parte de su carrera y contribuyó al arte cinético internacional con profundos lazos e influencias en el contexto latinoamericano, incluyendo la escena artística venezolana de vanguardia.",
+    "category": "Artes Plásticas",
+    "source": "Tate Modern"
   },
   {
     "title": "Bea",
