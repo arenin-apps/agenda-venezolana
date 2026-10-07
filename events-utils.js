@@ -178,7 +178,66 @@ function sameWordsIgnoringOrder(a, b) {
 // de las dos señales sola ya es suficiente evidencia de que es el mismo
 // evento — así se cubren ambos casos de arriba sin perder precisión en
 // los casos que ya funcionaban bien.
+// --- Detección "suave" de duplicados ------------------------------------
+// Gemini re-redacta títulos y lugares en cada corrida ("Ambassador's Gala
+// Dinner 2026" vs "Ambassador´s Gala Dinner", "KOKO" vs "KOKO Electronic:
+// Hernan Cattaneo"), así que la comparación exacta palabra por palabra deja
+// pasar copias. Esta segunda pasada exige fechas que se solapan + título
+// parecido + (mismo link, o mismo lugar). Nunca decide solo por link: hay
+// notas y listados que agrupan eventos distintos bajo la misma URL.
+function normalizeLinkSinParametros(url) {
+  return (url || "").trim().toLowerCase().replace(/[?#].*$/, "").replace(/\/+$/, "")
+}
+
+function fechasSeSolapan(a, b) {
+  if (!a.date || !b.date) return false
+  const finA = a.endDate || a.date
+  const finB = b.endDate || b.date
+  return a.date <= finB && b.date <= finA
+}
+
+function palabrasClave(texto) {
+  return normalizeText(texto).split(" ").filter((w) => w.length > 2)
+}
+
+function titulosParecidos(a, b) {
+  const na = normalizeText(a)
+  const nb = normalizeText(b)
+  if (!na || !nb) return false
+  const corto = na.length <= nb.length ? na : nb
+  const largo = na.length <= nb.length ? nb : na
+  if (corto.length >= 8 && largo.includes(corto)) return true
+  const A = new Set(palabrasClave(a))
+  const B = new Set(palabrasClave(b))
+  if (!A.size || !B.size) return false
+  const comunes = [...A].filter((w) => B.has(w)).length
+  return comunes / new Set([...A, ...B]).size >= 0.6
+}
+
+function lugaresParecidos(a, b) {
+  const na = normalizeText(a)
+  const nb = normalizeText(b)
+  if (!na || !nb) return false
+  return na === nb || na.includes(nb) || nb.includes(na) || sameWordsIgnoringOrder(a, b)
+}
+
+function esMismoEventoSuave(e, c) {
+  if (!fechasSeSolapan(e, c)) return false
+  if (!titulosParecidos(e.title, c.title)) return false
+  const mismoLink =
+    e.link && c.link && normalizeLinkSinParametros(e.link) === normalizeLinkSinParametros(c.link)
+  return mismoLink || lugaresParecidos(e.venue, c.venue)
+}
+
+// Primero la comparación exacta de siempre; si no encuentra nada, la suave.
 function findDuplicate(existing, candidate) {
+  return (
+    findDuplicateExacto(existing, candidate) ||
+    existing.find((e) => esMismoEventoSuave(e, candidate))
+  )
+}
+
+function findDuplicateExacto(existing, candidate) {
   const candTitle = candidate.title;
   const candVenue = candidate.venue;
 
@@ -235,7 +294,7 @@ function mergeAndSave(existingEvents, newEvents) {
     }
 
     if (evt.type === "temporada") {
-      if (!dup.endDate && evt.endDate) {
+      if (dup.type === "temporada" && !dup.endDate && evt.endDate) {
         // Completamos endDate, pero conservamos todo lo demás del
         // registro existente (sobre todo "date", la apertura original).
         dup.endDate = evt.endDate;
