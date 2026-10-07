@@ -142,9 +142,14 @@ async function extractFromUrl() {
     const response = await fetch(targetUrl, {
       headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" }
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status} al descargar la URL`);
+    // Algunos sitios (ej. Substack) devuelven 403 a los servidores de GitHub.
+    // En ese caso no abortamos: probamos con el proxy de renderizado mas abajo.
+    const descargaBloqueada = !response.ok;
+    if (descargaBloqueada) {
+      console.log(`⚠️ HTTP ${response.status} al descargar la URL directo. Probando con proxy de renderizado...`);
+    }
 
-    const rawHtml = await response.text();
+    const rawHtml = descargaBloqueada ? "" : await response.text();
     console.log(`📄 HTML crudo descargado: ${rawHtml.length} caracteres.`);
 
     // Los newsletters de Mailchimp suelen tener mucho HTML de plantilla
@@ -186,6 +191,11 @@ async function extractFromUrl() {
 
     if (cleanText.length < 200) {
       console.log(`⚠️ El texto limpio sigue siendo muy corto tras el reintento — es probable que la página no tenga contenido de texto accesible de ninguna forma (todo en imágenes, requiere login, o bloquea bots).`);
+    }
+
+    if (descargaBloqueada && cleanText.length < 200) {
+      console.error(`🚫 El sitio rechazo la descarga directa (HTTP ${response.status}) y el proxy de renderizado tampoco pudo leer la pagina. Cargá el evento a mano con "Agregar evento manualmente".`);
+      process.exit(1);
     }
 
     if (cleanText.length < 6000 && (esPaginaDeVerificacion(cleanText) || (cleanText === textoInicial && esPaginaDeVerificacion(rawHtml)))) {
