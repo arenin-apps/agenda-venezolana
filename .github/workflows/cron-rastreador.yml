@@ -23,6 +23,25 @@ jobs:
       - name: Install project dependencies
         run: npm install @google/generative-ai
 
+      - name: Esperar a que termine el rastreador de ARenIN (evita saturar Gemini)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 45); do
+            activos=0
+            for estado in in_progress queued; do
+              n=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/arenin-apps/agenda-argentina/actions/workflows/cron-rastreador.yml/runs?status=$estado&per_page=1" | jq '.total_count // 0' || echo 0)
+              activos=$((activos + ${n:-0}))
+            done
+            if [ "$activos" -eq 0 ]; then
+              echo "El rastreador de ARenIN no esta corriendo, sigo."
+              exit 0
+            fi
+            echo "El rastreador de ARenIN sigue corriendo; espero 60s ($i/45)..."
+            sleep 60
+          done
+          echo "Pasaron 45 min; sigo igual."
+
       - name: Run Script Extractor with Gemini AI
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
