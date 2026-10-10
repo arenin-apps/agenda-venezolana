@@ -78,7 +78,7 @@
     "title": "Barrio Triste",
     "type": "temporada",
     "date": "2026-09-18",
-    "endDate": "2026-10-05",
+    "endDate": "2026-10-12",
     "dateLabel": "Funciones del 18 al 19 de septiembre de 2026",
     "venue": "Institute of Contemporary Arts (ICA)",
     "city": "Londres",
@@ -388,6 +388,21 @@
     "description": "Proyección en el London Latino Film Festival. Cortometraje sobre Bea, una joven inmigrante venezolana que aprende a lidiar con lo que dejó atrás mientras descubre nuevas esperanzas en París.",
     "category": "Cine",
     "source": "London Latino Film Festival"
+  },
+  {
+    "title": "Julio Le Parc: Light. Colour. Action.",
+    "type": "temporada",
+    "date": "2026-10-10",
+    "endDate": "2027-05-03",
+    "dateLabel": "Hasta el 3 de mayo de 2027",
+    "venue": "Tate Modern",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Gratis para miembros / Consultar entrada",
+    "link": "https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc",
+    "description": "Exhibición del renombrado artista cinético franco-argentino Julio Le Parc, cuya obra y trayectoria forman parte fundamental del arte óptico y cinético sudamericano con fuertes lazos históricos con el movimiento cinético venezolano (como el grupo Los Teques y exposiciones en Venezuela).",
+    "category": "Artes Plásticas",
+    "source": "Tate Modern"
   },
   {
     "title": "Ricardo Montaner • London",
