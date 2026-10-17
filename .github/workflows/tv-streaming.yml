@@ -1,0 +1,63 @@
+name: TV y Streaming (TMDB)
+
+# Busca en TMDB series, documentales y peliculas venezolanas disponibles en
+# el Reino Unido y las agrega a eventos.json (categoria "TV y Streaming").
+# Se puede correr a mano desde la pestana Actions (Run workflow).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agenda-venezolana-tv-streaming
+  cancel-in-progress: false
+
+jobs:
+  tv-streaming:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Buscar streaming (TMDB) y guias de TV (BBC, ITV)
+        run: |
+          node tv-streaming.js
+          node tv-programacion.js
+          node tv-gemini.js
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "arenin-bot"
+          git config user.email "actions@github.com"
+          git add eventos.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en eventos.json"
+            exit 0
+          fi
+          git commit -m "Actualizar TV y streaming (TMDB)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            # Si otro proceso toco eventos.json y hay conflicto, se descarta
+            # el intento y se vuelve a generar sobre la version mas nueva.
+            git rebase --abort || true
+            git reset --hard origin/main
+            node tv-streaming.js
+            node tv-programacion.js
+            node tv-gemini.js
+            git add eventos.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "Actualizar TV y streaming (TMDB)"
+            sleep 5
+          done
+          echo "No se pudo hacer push despues de 3 intentos"
+          exit 1
