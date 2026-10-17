@@ -19,7 +19,7 @@ const { readEventos, mergeAndSave } = require('./events-utils')
 
 const SOURCE = 'Busqueda semanal de TV (Gemini + Google)'
 // La busqueda de Google (grounding) tiene cupo gratuito en Gemini 2.5, no en 3.x.
-const MODELOS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite']
+const MODELOS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-3.5-flash-lite']
 const DIAS = 8
 
 const CLAVES = /venezuel(a|an|ans)\b|venezolan[oa]s?\b|caracas|maracaibo|angel falls|simón bolívar|simon bolivar|vinotinto/i
