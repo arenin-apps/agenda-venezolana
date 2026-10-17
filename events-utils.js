@@ -229,11 +229,30 @@ function esMismoEventoSuave(e, c) {
   return mismoLink || lugaresParecidos(e.venue, c.venue)
 }
 
+// Emisiones de TV/streaming: el mismo programa o partido aparece en las fuentes
+// con la misma nota/enlace, pero el modelo a veces estima una fecha distinta
+// en cada corrida (o redacta el canal de otra forma). Para estos casos, mismo
+// título + mismo enlace alcanza, sin exigir que coincidan fecha ni lugar.
+const PALABRAS_LUGAR_TV = /televis|transmisi|streaming|\btv\b|bbc|\bitv|sky|channel|iplayer|netflix|prime|player/i
+
+function esLugarTV(v) {
+  return PALABRAS_LUGAR_TV.test(String(v || ''))
+}
+
+function esMismaEmisionTV(e, c) {
+  if (!esLugarTV(e.venue) || !esLugarTV(c.venue)) return false
+  if (!titulosParecidos(e.title, c.title)) return false
+  return Boolean(
+    e.link && c.link && normalizeLinkSinParametros(e.link) === normalizeLinkSinParametros(c.link)
+  )
+}
+
 // Primero la comparación exacta de siempre; si no encuentra nada, la suave.
 function findDuplicate(existing, candidate) {
   return (
     findDuplicateExacto(existing, candidate) ||
-    existing.find((e) => esMismoEventoSuave(e, candidate))
+    existing.find((e) => esMismoEventoSuave(e, candidate)) ||
+    existing.find((e) => esMismaEmisionTV(e, candidate))
   )
 }
 
