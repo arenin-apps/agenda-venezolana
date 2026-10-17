@@ -159,7 +159,7 @@ async function main() {
     const clave = (titulo + '|' + fecha + '|' + hora + '|' + canal).toLowerCase()
     if (vistos.has(clave)) continue
     vistos.add(clave)
-    const link = /^https:\/\//.test(String(it.url || '')) ? it.url : 'https://www.google.com/search?q=' + encodeURIComponent(titulo + ' ' + canal + ' TV')
+    const link = /^https:\/\/(?!vertexaisearch)/.test(String(it.url || '')) ? it.url : 'https://www.google.com/search?q=' + encodeURIComponent(titulo + ' ' + canal + ' TV')
     nuevos.push({
       title: titulo,
       type: 'unico',
