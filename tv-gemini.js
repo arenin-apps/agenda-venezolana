@@ -86,6 +86,20 @@ async function consultar(modelo, apiKey, prompt) {
   return partes.map((p) => p.text || '').join('\n')
 }
 
+// El modelo a veces responde 503 (alta demanda, temporal): se reintenta con espera.
+async function conReintentos(modelo, apiKey, prompt) {
+  const esperas = [20000, 45000]
+  for (let i = 0; ; i++) {
+    try {
+      return await consultar(modelo, apiKey, prompt)
+    } catch (err) {
+      if (!/^HTTP (500|503)/.test(err.message) || i >= esperas.length) throw err
+      console.log('Busqueda Gemini de TV: ' + modelo + ' saturado, se reintenta en ' + esperas[i] / 1000 + 's.')
+      await new Promise((r) => setTimeout(r, esperas[i]))
+    }
+  }
+}
+
 function extraerJson(texto) {
   const limpio = texto.replace(/\x60{3}(json)?/gi, '')
   const ini = limpio.indexOf('[')
@@ -115,7 +129,7 @@ async function main() {
   let texto = null
   for (const modelo of MODELOS) {
     try {
-      texto = await consultar(modelo, apiKey, prompt)
+      texto = await conReintentos(modelo, apiKey, prompt)
       console.log('Busqueda Gemini de TV: respuesta recibida de ' + modelo + '.')
       break
     } catch (err) {
