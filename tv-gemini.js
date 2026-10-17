@@ -39,9 +39,10 @@ function etiqueta(fecha, hora) {
 
 function debeCorrer() {
   if (process.env.GITHUB_EVENT_NAME === 'schedule') {
-    const lunes = new Date().getUTCDay() === 1
-    if (!lunes) console.log('Busqueda Gemini de TV: solo corre los lunes en la ejecucion programada, se omite hoy.')
-    return lunes
+    const dia = new Date().getUTCDay() // 1 = lunes, 4 = jueves
+    const toca = dia === 1 || dia === 4
+    if (!toca) console.log('Busqueda Gemini de TV: solo corre lunes y jueves en la ejecucion programada, se omite hoy.')
+    return toca
   }
   return true
 }
