@@ -74,7 +74,8 @@ function buildPrompt(sourceName, sourceUrl, cleanText) {
 
     3. El evento debe tomar lugar físicamente en el Reino Unido (Inglaterra, Escocia, Gales o Irlanda del Norte), O ser una transmisión/streaming accesible desde el Reino Unido (TV, radio, plataforma online, partido retransmitido). Descartá eventos presenciales que ocurran fuera del Reino Unido, aunque sean de relevancia cultural venezolana (ej. una exposición en Caracas, un recital en Bogotá, una muestra en España) — esta agenda es específicamente para la comunidad venezolana que vive en el Reino Unido, no para noticias culturales venezolanas en general.
     4. El texto incluye links junto al nombre de cada elemento en formato "texto [URL]". Para el campo "link", usá el URL específico de la página de ESE evento (el que aparece junto a su título o su botón de "más info"/"tickets"). Solo si no encontrás ningún link específico para ese evento, usá ${sourceUrl} como respaldo.
-    5. Usá la categoría "Workshops" para talleres, laboratorios, cursos o entrenamientos donde la gente participa activamente para aprender o practicar una habilidad con un facilitador (ej. talleres de improvisación vocal, clases regulares, entrenamientos para líderes de grupo). Usá "Comunidad" para encuentros sociales/culturales sin ese componente de aprendizaje activo (ferias, comidas, celebraciones).
+    5. Usá la categoría "Workshops" para talleres, laboratorios, cursos o entrenamientos donde la gente participa activamente para aprender o practicar una habilidad con un facilitador (ej. talleres de improvisación vocal, clases regulares, entrenamientos para líderes de grupo). Usá "Comunidad" para encuentros sociales/culturales sin ese componente de aprendizaje activo (ferias, comidas, celebraciones). Usá la categoría "TV y Streaming" para series, documentales, películas o programas que se emiten por televisión o están disponibles en plataformas de streaming accesibles desde el Reino Unido (BBC iPlayer, ITVX, Channel 4, Film4, Netflix, Prime Video, Apple TV+, MUBI, BFI Player, etc.) y tienen un vínculo específico con Venezuela. En "venue" poné el canal o la plataforma, en "city" poné "Reino Unido" y en "region" poné "Reino Unido". Si es una emisión con día y hora usá "unico" y escribí el horario en "dateLabel"; si es un título disponible en streaming hasta cierta fecha usá "temporada" con "endDate" igual a esa fecha límite. Los partidos de fútbol, rugby u otros deportes (selecciones o clubes venezolanos) que se ven por TV o streaming van en "TV y Streaming" (canal en "venue", día y hora en "dateLabel"). Solo van en "Deportes" los partidos o competencias en vivo en un estadio o sede dentro del Reino Unido. NUNCA inventes ni estimes una fecha: si el texto no indica con claridad el día del partido o programa (por ejemplo, notas de "vista previa" sin fecha, o notas publicadas cuando el evento ya se jugó o se emitió), excluí ese evento en lugar de adivinar una fecha. Cada partido o programa debe aparecer una sola vez.
+
     6. Devuelve únicamente un arreglo JSON puro (sin texto adicional) con esta forma:
     [
       {
@@ -89,7 +90,7 @@ function buildPrompt(sourceName, sourceUrl, cleanText) {
         "price": "Precio estimado o 'Entrada Libre'",
         "link": "URL del evento o en su defecto ${sourceUrl}",
         "description": "Breve descripción y su relación con Venezuela",
-        "category": "Música / Teatro / Deportes / Artes Plásticas / Cine / Comunidad / Workshops",
+        "category": "Música / Teatro / Deportes / Artes Plásticas / Cine / Comunidad / Workshops / TV y Streaming",
         "source": "${sourceName}"
       }
     ]
