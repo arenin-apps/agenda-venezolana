@@ -66,6 +66,99 @@
       return `Desde el ${formatDateOnly(evt.date)}`;
     }
 
+    // --- Agregar al calendario (Google Calendar y archivo .ics) ---
+    function calPad(n) { return String(n).padStart(2, '0') }
+
+    function calParseTimes(label) {
+      const out = []
+      const re = /(\d{1,2}):(\d{2})\s*(am|pm)?/gi
+      let m
+      while ((m = re.exec(label || '')) && out.length < 2) {
+        let h = parseInt(m[1], 10)
+        const mi = parseInt(m[2], 10)
+        const ap = (m[3] || '').toLowerCase()
+        if (ap === 'pm' && h < 12) h += 12
+        if (ap === 'am' && h === 12) h = 0
+        if (h > 23 || mi > 59) continue
+        out.push([h, mi])
+      }
+      if (!out.length) {
+        const re2 = /\b(\d{1,2})\s*(am|pm)\b/i
+        const m2 = re2.exec(label || '')
+        if (m2) {
+          let h = parseInt(m2[1], 10)
+          if (m2[2].toLowerCase() === 'pm' && h < 12) h += 12
+          if (m2[2].toLowerCase() === 'am' && h === 12) h = 0
+          if (h <= 23) out.push([h, 0])
+        }
+      }
+      return out
+    }
+
+    // Convierte una hora local de Londres a UTC (maneja horario de verano).
+    function calLondonToUtc(ymd, h, mi) {
+      const [y, m, d] = ymd.split('-').map(Number)
+      const guess = Date.UTC(y, m - 1, d, h, mi)
+      const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', timeZoneName: 'shortOffset' }).formatToParts(new Date(guess))
+      const tz = parts.find((p) => p.type === 'timeZoneName')
+      const mm = /GMT([+-]\d+)?/.exec((tz && tz.value) || 'GMT')
+      const off = mm && mm[1] ? parseInt(mm[1], 10) : 0
+      return new Date(guess - off * 3600000)
+    }
+
+    function calFmtUtc(dt) {
+      return dt.getUTCFullYear() + calPad(dt.getUTCMonth() + 1) + calPad(dt.getUTCDate()) + 'T' + calPad(dt.getUTCHours()) + calPad(dt.getUTCMinutes()) + '00Z'
+    }
+
+    function calFmtDay(ymd, plusDays) {
+      const [y, m, d] = ymd.split('-').map(Number)
+      const dt = new Date(Date.UTC(y, m - 1, d + (plusDays || 0)))
+      return dt.getUTCFullYear() + calPad(dt.getUTCMonth() + 1) + calPad(dt.getUTCDate())
+    }
+
+    function calBuild(evt) {
+      const day = String((evt && evt.date) || '').slice(0, 10)
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return null
+      const isSeasonEvt = evt.type === 'temporada'
+      const times = isSeasonEvt ? [] : calParseTimes(evt.dateLabel)
+      const where = [evt.venue, evt.city].filter(Boolean).join(', ')
+      const desc = [evt.description, evt.link].filter(Boolean).join('\n\n')
+      if (times.length) {
+        const s = calLondonToUtc(day, times[0][0], times[0][1])
+        let e = times[1] ? calLondonToUtc(day, times[1][0], times[1][1]) : new Date(s.getTime() + 2 * 3600000)
+        if (e <= s) e = new Date(e.getTime() + 24 * 3600000)
+        return { title: evt.title, where, desc, start: calFmtUtc(s), end: calFmtUtc(e), allDay: false, day }
+      }
+      const endDay = /^\d{4}-\d{2}-\d{2}$/.test(String(evt.endDate || '').slice(0, 10)) ? String(evt.endDate).slice(0, 10) : day
+      return { title: evt.title, where, desc, start: calFmtDay(day, 0), end: calFmtDay(endDay, 1), allDay: true, day }
+    }
+
+    function googleCalendarUrl(evt) {
+      const c = calBuild(evt)
+      if (!c) return null
+      return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(c.title) +
+        '&dates=' + c.start + '/' + c.end + '&details=' + encodeURIComponent(c.desc) + '&location=' + encodeURIComponent(c.where)
+    }
+
+    function icsEscape(s) {
+      return String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n')
+    }
+
+    function icsDataUrl(evt) {
+      const c = calBuild(evt)
+      if (!c) return null
+      const uid = (String(evt.title || '') + c.day).replace(/[^A-Za-z0-9]/g, '').slice(0, 60) + '@' + (location.hostname || 'agenda')
+      const lines = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Agenda comunitaria//ES', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
+        'UID:' + uid, 'DTSTAMP:' + calFmtUtc(new Date()),
+        c.allDay ? 'DTSTART;VALUE=DATE:' + c.start : 'DTSTART:' + c.start,
+        c.allDay ? 'DTEND;VALUE=DATE:' + c.end : 'DTEND:' + c.end,
+        'SUMMARY:' + icsEscape(c.title), 'LOCATION:' + icsEscape(c.where), 'DESCRIPTION:' + icsEscape(c.desc),
+        'END:VEVENT', 'END:VCALENDAR',
+      ]
+      return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n'))
+    }
+
     function isStreamingEvt(evt) {
       return ((evt && evt.category) || '').toLowerCase().includes('streaming')
     }
@@ -305,6 +398,14 @@
                             {isSeason && !isStreamingEvt(evt) ? formatSeasonLabel(evt) : (evt.dateLabel || formatFallbackLabel(evt.date))}
                           </span>
                         </div>
+                        {!(isSeason && isStreamingEvt(evt)) && googleCalendarUrl(evt) && (
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-400">
+                            <span>Añadir al calendario:</span>
+                            <a href={googleCalendarUrl(evt)} target="_blank" rel="noopener noreferrer" className="text-sky-400 font-bold hover:underline">Google</a>
+                            <a href={icsDataUrl(evt)} download="evento.ics" className="text-sky-400 font-bold hover:underline">Apple / Outlook (.ics)</a>
+                          </div>
+                        )}
+
 
                         {evt.venue && (
                           <div className="flex items-start gap-2.5 text-slate-300 text-sm">
