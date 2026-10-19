@@ -690,6 +690,36 @@
     "source": "TMDB (streaming Reino Unido)"
   },
   {
+    "title": "Ricardo Montaner • Stockholm",
+    "type": "unico",
+    "date": "2026-10-19",
+    "endDate": null,
+    "dateLabel": "LUNES, 19 DE OCTUBRE 2026 - 19:00",
+    "venue": "Göta Lejon",
+    "city": "Stockholm",
+    "region": "Stockholms län",
+    "price": "Consultar web",
+    "link": "https://www.wblive.co.uk/events/ricardo-montaner-stockholm",
+    "description": "El reconocido cantautor venezolano Ricardo Montaner llega a Estocolmo con su gira “El Último Regreso Tour”. Nota: Evento presencial fuera del Reino Unido (Suecia).",
+    "category": "Música",
+    "source": "WB Live"
+  },
+  {
+    "title": "Julio Le Parc: Light. Colour. Action.",
+    "type": "temporada",
+    "date": "2026-10-19",
+    "endDate": "2027-05-03",
+    "dateLabel": "Hasta el 3 de mayo de 2027",
+    "venue": "Tate Modern",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Gratis para miembros",
+    "link": "https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc",
+    "description": "Exhibición del renombrado artista cinético argentino Julio Le Parc, cuya obra y trayectoria tienen importantes conexiones históricas y colaboraciones dentro del arte latinoamericano y exposiciones con presencia venezolana.",
+    "category": "Artes Plásticas",
+    "source": "Tate Modern"
+  },
+  {
     "title": "La Londinense Orchestra presents: 60 years of salsa",
     "type": "unico",
     "date": "2026-10-24",
