@@ -838,5 +838,20 @@
     "description": "Evento cultural y gastronómico dedicado a celebrar la cultura y los sabores de Venezuela.",
     "category": "Comunidad",
     "source": "Events List"
+  },
+  {
+    "title": "Lucha Libre World",
+    "type": "temporada",
+    "date": "2027-04-16",
+    "endDate": "2027-04-17",
+    "dateLabel": "Hasta el 17 de abril de 2027",
+    "venue": "York Hall",
+    "city": "Londres",
+    "region": "Inglaterra",
+    "price": "Consultar web",
+    "link": "https://www.wblive.co.uk/events/luchalibreworld-2025-k6szz",
+    "description": "Evento de Lucha Libre World en Londres. El texto no especifica un vínculo cultural o de nacionalidad con Venezuela.",
+    "category": "Comunidad",
+    "source": "WB Live"
   }
 ]
